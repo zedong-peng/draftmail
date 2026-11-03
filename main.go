@@ -1,4 +1,4 @@
-// Command draftmail is an MCP server that lets an agent search and read your IMAP mail and write
+// Command imap-draft-mcp is an MCP server that lets an agent search and read your IMAP mail and write
 // drafts. It cannot send, move or delete anything: there is no code for it. Drafts wait in your
 // Drafts folder for you to review and send from your own mail app.
 package main
@@ -32,9 +32,9 @@ func main() {
 	showVersion := flag.Bool("version", false, "print the version and exit")
 	flag.Parse()
 	log.SetFlags(0)
-	log.SetPrefix("draftmail: ")
+	log.SetPrefix("imap-draft-mcp: ")
 	if *showVersion {
-		fmt.Println("draftmail", version)
+		fmt.Println("imap-draft-mcp", version)
 		return
 	}
 	accounts, err := parseAccounts(os.Getenv("EMAIL_CREDENTIALS"))
@@ -66,7 +66,7 @@ func hostCheck(allowed []string, next http.Handler) http.Handler {
 		}
 		host = strings.Trim(host, "[]")
 		if host != "localhost" && host != "127.0.0.1" && host != "::1" && !slices.Contains(allowed, host) {
-			http.Error(w, "host not allowed: start draftmail with -allow-host "+host, http.StatusForbidden)
+			http.Error(w, "host not allowed: start imap-draft-mcp with -allow-host "+host, http.StatusForbidden)
 			return
 		}
 		next.ServeHTTP(w, r)
@@ -114,7 +114,7 @@ type draftOut struct {
 }
 
 func newServer(accounts []account) *mcp.Server {
-	s := mcp.NewServer(&mcp.Implementation{Name: "draftmail", Version: version}, &mcp.ServerOptions{Instructions: instructions})
+	s := mcp.NewServer(&mcp.Implementation{Name: "imap-draft-mcp", Version: version}, &mcp.ServerOptions{Instructions: instructions})
 	readOnly := &mcp.ToolAnnotations{ReadOnlyHint: true}
 
 	mcp.AddTool(s, &mcp.Tool{Name: "search", Annotations: readOnly,

@@ -146,7 +146,7 @@ func compose(s draftSpec, now time.Time) ([]byte, error) {
 func messageID(from string) string {
 	b := make([]byte, 12)
 	rand.Read(b)
-	domain := "draftmail.local"
+	domain := "localhost"
 	if i := strings.LastIndex(from, "@"); i >= 0 {
 		domain = from[i+1:]
 	}

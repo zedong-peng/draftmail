@@ -1,0 +1,28 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.zedong-peng/imap-draft-mcp",
+  "title": "IMAP Draft",
+  "description": "IMAP mail for agents: search, read and write drafts. It can't send, move or delete.",
+  "repository": {
+    "url": "https://github.com/zedong-peng/imap-draft-mcp",
+    "source": "github"
+  },
+  "version": "0.0.0",
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/zedong-peng/imap-draft-mcp:0.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "EMAIL_CREDENTIALS",
+          "description": "Comma-separated address:password[:imap-host[:port]], e.g. me@icloud.com:app-password",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

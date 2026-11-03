@@ -1,4 +1,4 @@
-module github.com/zedong-peng/draftmail
+module github.com/zedong-peng/imap-draft-mcp
 
 go 1.26.10
 
